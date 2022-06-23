@@ -22,6 +22,7 @@ class CreatePeliculasTable extends Migration
             $table->string('sinopsis');
             $table->string('imagen');
             $table->integer('actorID');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

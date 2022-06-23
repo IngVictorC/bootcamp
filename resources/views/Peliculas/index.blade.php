@@ -12,6 +12,7 @@
                     <div class="">    
                         <a  href="{{route("home")}}" class="btn btn-success btn-sm mb-2">Home</a>
                         <a  href="{{route("pelicula.create")}}" class="btn btn-success btn-sm mb-2">Agregar</a>
+                       
                     </div>
                     <table class="table table-hover">
                         <thead>
@@ -20,6 +21,7 @@
                                 <th scope="col">Titulo</th>
                                 <th scope="col">Año</th>
                                 <th scope="col">Duracion</th>
+                                <th scope="col"></th>
                                 <th scope="col"></th>
                                 <th scope="col"></th>
                             </tr>
@@ -46,6 +48,7 @@
                                         </button>
                                     </form>
                                 </td> 
+                                
                             </tr>
                             @endforeach
                         </tbody>

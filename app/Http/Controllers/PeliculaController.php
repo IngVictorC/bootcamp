@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Requests\ValidarFormRequest;
 use Intervention\Image\Facades\Image;
 use App\Models\Pelicula;
 use App\Models\Actor;
@@ -41,15 +41,24 @@ class PeliculaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'codigo' => 'required|numeric|',
+            'anio' => 'required|numeric|regex:/^[0-9]+$/',
+            'titulo' => 'required|max:255',
+            'duracion' => 'required|numeric|regex:/^[0-9]+$/',
+            'sinopsis' => 'required|max:255',
+            'imagen' => 'nullable|file|image|max:8192',
+        ]);
+
         $peliculas = new Pelicula();
         
         //dd($request->hasFile('imagen'));
 
-        $peliculas->codigo = $request->get('codigo');
-        $peliculas->anio = $request->get('anio');
-        $peliculas->titulo = $request->get('titulo');
-        $peliculas->duracion = $request->get('duracion');
-        $peliculas->sinopsis = $request->get('sinopsis');
+        $peliculas->codigo = $request->codigo;
+        $peliculas->anio = $request->anio;
+        $peliculas->titulo = $request->titulo;
+        $peliculas->duracion = $request->duracion;
+        $peliculas->sinopsis = $request->sinopsis;
         //imagen
 
         $image_resize = Image::make($request->file('imagen')->getRealPath());
@@ -66,7 +75,7 @@ class PeliculaController extends Controller
 
         //$peliculas->imagen = 'archi.jpg';
          
-        $peliculas->actorID = $request->get('actorID'); 
+        $peliculas->actorID = $request->actorID; 
         $peliculas->save();
 
         return redirect('/pelicula');
@@ -109,11 +118,11 @@ class PeliculaController extends Controller
     public function update(Request $request, $id)
     {
         $pelicula = Pelicula::find($id);
-        $pelicula->codigo = $request->get('codigo');
-        $pelicula->anio = $request->get('anio');
-        $pelicula->titulo = $request->get('titulo');
-        $pelicula->duracion = $request->get('duracion');
-        $pelicula->sinopsis = $request->get('sinopsis');
+        $pelicula->codigo = $request->codigo;
+        $pelicula->anio = $request->anio;
+        $pelicula->titulo = $request->titulo;
+        $pelicula->duracion = $request->duracion;
+        $pelicula->sinopsis = $request->sinopsis;
         
         //imagen
 
@@ -129,7 +138,7 @@ class PeliculaController extends Controller
         $pelicula->imagen = $nombre_archivo;
 
 
-        $pelicula->actorID = $request->get('actorID');    
+        $pelicula->actorID = $request->actorID;    
         $pelicula->save();
 
         return redirect('/pelicula');

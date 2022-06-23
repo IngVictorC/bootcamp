@@ -15,44 +15,67 @@
 
                         <div class="form-group row">
                             <label for="codigo" class="col-md-3 col-form-label text-md-right">{{ __('Codigo') }}</label>
-                        <div class="col-md-7">
-                            <input id="codigo" name= 'codigo' type="text" class="form-control" required autofocus>
-                        </div>
-
+                            <div class="col-md-7">
+                                <input id="codigo" name= 'codigo' type="number" class="form-control"  value="{{old('codigo')}}" autofocus>
+                                @error('codigo')
+                                <span >
+                                    <small>{{ $message }}</small>
+                                </span>
+                                @enderror
+                            </div>
+                    
                         </div>	
-
+                        <br/>
+                        
                         <div class="form-group row">
-                            <label for="titulo" class="col-md-3 col-form-label text-md-right">{{ __('Titulo') }}</label>
-                        <div class="col-md-7">
-                            <input id="titulo" name= 'titulo' type="text" class="form-control" required>
-                        </div>    
-                            
+                                <label for="titulo" class="col-md-3 col-form-label text-md-right">{{ __('Titulo') }}</label>
+                            <div class="col-md-7">
+                                <input id="titulo" name= 'titulo' type="text"  value="{{old('titulo')}}" class="form-control" >
+                            </div>    
+                            @error('titulo')
+                            <span >
+                                <small>{{ $message }}</small>
+                            </span>
+                            @enderror
                         </div>
-
+                        <br/>
                         <div class="form-group row">
-                            <label for="anio" class="col-md-3 col-form-label text-md-right">{{ __('Año') }}</label>
-                        <div class="col-md-7">
-                            <input id="anio" name= 'anio' type="text" class="form-control" required>
-                        </div>    
-                            
+                                <label for="anio" class="col-md-3 col-form-label text-md-right">{{ __('Año') }}</label>
+                            <div class="col-md-7">
+                                <input id="anio" name= 'anio' type="text" value="{{old('anio')}}" class="form-control" >
+                            </div>    
+                            @error('anio')
+                            <span >
+                                <small>{{ $message }}</small>
+                            </span>
+                            @enderror
                         </div>
                         
-                                                                       
+                        <br/>                                              
                         <div class="form-group row">
-                            <label for="duracion" class="col-md-3 col-form-label text-md-right">{{ __('Duración (min.)') }}</label>
-                        <div class="col-md-7">
-                            <input id="duracion" name= 'duracion' type="text" class="form-control" required>
+                                <label for="duracion" class="col-md-3 col-form-label text-md-right">{{ __('Duración (min.)') }}</label>
+                            <div class="col-md-7">
+                                <input id="duracion" name= 'duracion' type="text" value="{{old('duracion')}}"class="form-control" >
+                            </div>
+                            @error('duaracion')
+                            <span >
+                                <small>{{ $message }}</small>
+                            </span>
+                            @enderror
                         </div>
-                           
-                        </div>
-
+                        <br/>
                         <div class="form-group row">
                             <label for="sinopsis" class="col-md-3 col-form-label text-md-right">{{ __('Sinopsis') }}</label>
                             <div class="col-md-7">
-                                <textarea id="sinopsis" name= 'sinopsis' class="form-control" >  </textarea>                        
+                                <textarea id="sinopsis" name= 'sinopsis' value="{{old('sinopsis')}}" class="form-control" >  </textarea>                        
                             </div>
+                            @error('sinopsis')
+                            <span >
+                                <small>{{ $message }}</small>
+                            </span>
+                            @enderror
                         </div>
-                    
+                        <br/>
                         <div class="form-group row">
                             <label for="actorID" class="col-md-3 col-form-label text-md-right">{{ __('Actor Principal') }}</label>
                             <div class="form-group col-md-7">

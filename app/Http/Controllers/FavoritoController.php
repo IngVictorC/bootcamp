@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ValidarFormRequest;
-use App\Models\Actor;
+use App\Models\Favorito;
+use App\Models\Pelicula;
 use Illuminate\Http\Request;
 
-class ActorController extends Controller
+class FavoritoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,13 @@ class ActorController extends Controller
      */
     public function index()
     {
-        $actores = Actor::all();
-        return view('Actores.index')->with('actores', $actores);
+
+        $peliculas = Pelicula::all();
+        $favoritos = Favorito::all();
+        
+        return view('Favoritos.index')->with ('peliculas',$peliculas)
+                                      ->with ('favoritos',$favoritos);
+
     }
 
     /**
@@ -24,9 +29,29 @@ class ActorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function agregar(Request $request){
+       
+        if($request->ajax()){
+            
+            $favoritos = new Favorito();
+            $peliculaID = $favoritos->peliculaID = $request->id;
+            $favoritos->save();
+            
+            $pelicula = Pelicula::find($peliculaID);
+
+            return response()->json($pelicula->toArray());
+
+        }
+       /*
+        $favoritos = new Favorito();
+        $favoritos->peliculaID = $id;
+        
+        $favoritos->save();
+        return response($favoritos);*/
+    }
     public function create()
     {
-        return view('Actores.create');
+        //
     }
 
     /**
@@ -37,18 +62,13 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|max:15',
-            'fechaNac' => 'required',
-        ]);
+        $favoritos = new Favorito();
+        $favoritos->peliculaID = $request->id;
         
-        $actores = new Actor();
-        $actores->nombre = $request->nombre;
-        $actores->fechaNac = $request->fechaNac;
-        $actores->save();
+        $favoritos->save();
 
-        return redirect('/actor');
-    } 
+        return response()->json ($favoritos)->with('favoritos',$favoritos); 
+    }
 
     /**
      * Display the specified resource.
@@ -69,8 +89,7 @@ class ActorController extends Controller
      */
     public function edit($id)
     {
-        $actor = Actor::find($id);
-        return view('Actores.edit')->with('actor', $actor);
+        //
     }
 
     /**
@@ -82,12 +101,7 @@ class ActorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $actor = Actor::find($id);
-        $actor->nombre = $request->nombre;
-        $actor->fechaNac = $request->fechaNac;
-        $actor->save();
-
-        return redirect('/actor');
+        //
     }
 
     /**
@@ -98,10 +112,6 @@ class ActorController extends Controller
      */
     public function destroy($id)
     {
-        $actor = Actor::find($id);
-        $actor->delete();
-
-        return redirect('/actor');
-
+        //
     }
 }

@@ -9,7 +9,7 @@
 <div class="form-group">
     <a class="btn btn-primary" href="{{route("pelicula.index")}}">Peliculas</a>
     <a class="btn btn-primary" href="{{route("actor.index")}}">Actores</a>
-    <a class="btn btn-primary" href="{{route("actor.index")}}">Favoritos</a>
+    <a class="btn btn-primary" href="{{route("favorito.index")}}">Favoritos</a>
 
 </div>
 @endsection
